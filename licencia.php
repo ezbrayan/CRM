@@ -2,6 +2,8 @@
 require_once("Config/conexion.php");
 
 $mensaje = ""; // Inicializamos el mensaje como vacío
+$fecha_actual = date('Y-m-d'); // Defino la fecha actual
+$fecha_vencimiento = date('Y-m-d', strtotime('+1 year', strtotime($fecha_actual))); // hacemos el calculo de tiempo para el vencimiento
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener el NIT y el estado del formulario
@@ -26,12 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $long = 20;
         $licencia = substr(str_shuffle($caracteres), 0, $long);
 
-        // Obtener la fecha actual
-        $fecha_actual = date('Y-m-d');
-
-        // se calcula la fecha de vencimiento (sumando 1 año)
-        $fecha_vencimiento = date('Y-m-d', strtotime('+1 year', strtotime($fecha_actual)));
-
         // Insertar la licencia generada en la tabla licencia
         $query = "INSERT INTO licencia (licencia, nitc, estado, fecha_inicial, fecha_final) VALUES (:licencia, :nitc, :estado, :fecha_inicial, :fecha_final)";
         $statement = $pdo->prepare($query);
@@ -43,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'fecha_final' => $fecha_vencimiento
         ));
 
-        // Verificar si se insertó correctamente la licencia
-        if($statement->rowCount() > 0) {
+        // Verificar si se inserto correctamente la licencia
+        if ($statement->rowCount() > 0) {
             $mensaje = "La licencia se ha generado y guardado en la base de datos.";
         } else {
             $mensaje = "Ha ocurrido un error al generar y guardar la licencia.";
@@ -54,11 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Datos de Licencia</title>
 </head>
+
 <body>
     <h2>Subir Datos de Licencia</h2>
     <?php
@@ -87,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </select><br><br>
-        
+
         <label for="estado">Selecciona el estado de la licencia:</label><br>
         <select id="estado" name="estado" required>
             <option value="" disabled selected>Selecciona un estado</option>
@@ -103,8 +101,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </select><br><br>
+        <label for="fecha_inicial">Fecha de Creación:</label><br>
+        <input type="text" id="fecha_inicial" name="fecha_inicial" value="<?php echo $fecha_actual; ?>" readonly><br><br>
+
+        <label for="fecha_final">Fecha de Vencimiento:</label><br>
+        <input type="text" id="fecha_final" name="fecha_final" value="<?php echo $fecha_vencimiento; ?>" readonly><br><br>
 
         <input type="submit" value="Subir Datos">
     </form>
 </body>
+
 </html>
