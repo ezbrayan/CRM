@@ -47,7 +47,7 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">Nosotros</a></li>
+          <li><a href="about.php">Acerca de Nosotros</a></li>
           <li><a href="servicio.php">Servicios</a></li>
           <li><a href="contacto.php">Contacto</a></li>
         </ul>

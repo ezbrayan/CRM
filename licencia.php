@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si ya existe una licencia para el NIT dado
     $query_verificar = "SELECT COUNT(*) as count FROM licencia WHERE nitc = :nit";
     $statement_verificar = $pdo->prepare($query_verificar);
-    $statement_verificar->execute(array(':nit' => $nit));
+    $statement_verificar->execute(array('nit' => $nit));
     $resultado_verificar = $statement_verificar->fetch(PDO::FETCH_ASSOC);
 
     if ($resultado_verificar['count'] > 0) {
@@ -29,18 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtener la fecha actual
         $fecha_actual = date('Y-m-d');
 
-        // Calcular la fecha de vencimiento (por ejemplo, sumando 1 año)
+        // se calcula la fecha de vencimiento (sumando 1 año)
         $fecha_vencimiento = date('Y-m-d', strtotime('+1 year', strtotime($fecha_actual)));
 
         // Insertar la licencia generada en la tabla licencia
         $query = "INSERT INTO licencia (licencia, nitc, estado, fecha_inicial, fecha_final) VALUES (:licencia, :nitc, :estado, :fecha_inicial, :fecha_final)";
         $statement = $pdo->prepare($query);
         $statement->execute(array(
-            ':licencia' => $licencia,
-            ':nitc' => $nit,
-            ':estado' => $estado,
-            ':fecha_inicial' => $fecha_actual,
-            ':fecha_final' => $fecha_vencimiento
+            'licencia' => $licencia,
+            'nitc' => $nit,
+            'estado' => $estado,
+            'fecha_inicial' => $fecha_actual,
+            'fecha_final' => $fecha_vencimiento
         ));
 
         // Verificar si se insertó correctamente la licencia
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </select><br><br>
-        
+
         <input type="submit" value="Subir Datos">
     </form>
 </body>
