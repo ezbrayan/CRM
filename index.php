@@ -69,7 +69,7 @@
     <div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
       <h1>Tecni - Electric</h1>
       <h2>Optimiza, Organiza y Prospera, <strong>Tecni</strong> tu solución Informática</h2>
-      <a href="formulario.php?accion=registro" class="btn-about">Registrarse</a>
+      <a href="login.php?accion=registro" class="btn-about">Registrarse</a>
     </div>
   </section><!-- End Hero -->
   

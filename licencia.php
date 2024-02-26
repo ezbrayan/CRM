@@ -2,7 +2,7 @@
 require_once("Config/conexion.php");
 
 $fecha_actual = date('Y-m-d'); // Defino la fecha actual
-$fecha_vencimiento = date('Y-m-d', strtotime('+1 year', strtotime($fecha_actual))); // hacemos el calculo de tiempo para el vencimiento
+$fecha_vencimiento = date('Y-m-d', strtotime('+1 year', strtotime($fecha_actual))); // calculamos de tiempo para el vencimiento
 
 // Generar una licencia aleatoria
 $caracteres = "lkjhsysaASMNB8811AMMaksjyuyysth098765432%#%poiyAZXSDEWOjhhs";
@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <select id="estado" name="estado" class="form-control" required>
                                 <option value="" disabled selected>Selecciona un estado</option>
                                 <?php
-                                $query_estados = "SELECT id_est, tip_est FROM estado WHERE id_est < 2"; // Ajusta la condición según tu necesidad
+                                $query_estados = "SELECT id_est, tip_est FROM estado WHERE id_est < 2";
                                 $statement_estados = $pdo->prepare($query_estados);
                                 $statement_estados->execute();
                                 while ($row = $statement_estados->fetch(PDO::FETCH_ASSOC)) {
