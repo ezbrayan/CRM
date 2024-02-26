@@ -7,31 +7,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
     
-    $database = new Database();
-    $pdo = $database->conectar();
-    
-    $sql = "INSERT INTO empresa (nitc, nombre, direccion, telefono) VALUES (:nitc, :nombre, :direccion, :telefono)";
-    
-    $stmt = $pdo->prepare($sql);
-    
-    $params = array(
-        ':nitc' => $nitc,
-        ':nombre' => $nombre,
-        ':direccion' => $direccion,
-        ':telefono' => $telefono
-    );
-    
-    if($stmt->execute($params)){
-        echo "Empresa creada correctamente.";
-
-    } else{
-      
-        echo "Error al crear la empresa.";
-
+    // Verificar si todos los campos están llenos
+    if(empty($nitc) || empty($nombre) || empty($direccion) || empty($telefono)){
+        echo "<script>alert('Todos los campos son obligatorios.')</script>";
+    } elseif (!is_numeric($nitc) || !is_numeric($telefono)) {
+        echo "<script>alert('El NITC y el teléfono deben contener solo números.')</script>";
+    } else {
+        $database = new Database();
+        $pdo = $database->conectar();
+        
+        // Verificar si ya existe un registro con el mismo NITC
+        $stmt = $pdo->prepare("SELECT * FROM empresa WHERE nitc = :nitc");
+        $stmt->execute([':nitc' => $nitc]);
+        $existingNitc = $stmt->fetch();
+        
+        // Verificar si ya existe un registro con el mismo nombre
+        $stmt = $pdo->prepare("SELECT * FROM empresa WHERE nombre = :nombre");
+        $stmt->execute([':nombre' => $nombre]);
+        $existingNombre = $stmt->fetch();
+        
+        if($existingNitc) {
+            echo "<script>alert('Ya existe una empresa con este NITC.')</script>";
+        } elseif ($existingNombre) {
+            echo "<script>alert('Ya existe una empresa con este nombre.')</script>";
+        } else {
+            // Insertar datos en la base de datos
+            $sql = "INSERT INTO empresa (nitc, nombre, direccion, telefono) VALUES (:nitc, :nombre, :direccion, :telefono)";
+            $stmt = $pdo->prepare($sql);
+            
+            $params = array(
+                ':nitc' => $nitc,
+                ':nombre' => $nombre,
+                ':direccion' => $direccion,
+                ':telefono' => $telefono
+            );
+            
+            if($stmt->execute($params)){
+                echo "<script>alert('Empresa creada correctamente.')</script>";
+            } else {
+                echo "<script>alert('Error al crear la empresa.')</script>";
+            }
+        }
+        
+        unset($stmt);
+        unset($pdo);
     }
-    
-    unset($stmt);
-    unset($pdo);
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tecni-Electric</title>
+  <title>Empresa</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -63,97 +83,50 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Kelly
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 
 </head>
 
 <body>
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-    </div>
-  </header><!-- End Header -->
+
   
   
   <!-- ======= Hero Section ======= -->
-  <section >
-    <h2>Crear Empresa</h2>
-    <form action="" method="post">
-        <label for="nitc">NIT:</label>
-        <input type="text" id="nitc" name="nitc" required><br><br>
-        
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
-        
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required><br><br>
-        
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" required><br><br>
-        
-        <input type="submit" value="Crear Empresa">
-    </form>
-  </section><!-- End Hero -->
+  <section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="mb-4">Crear Empresa</h2>
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="nitc" class="form-label">NIT:</label>
+                            <input type="number" class="form-control" id="nitc" name="nitc" pattern="[0-9]*" title="Ingrese solo números" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="number" class="form-control" id="telefono" name="telefono" pattern="[0-9]*" title="Ingrese solo números" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Generar Empresa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   
-
- <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>TecniElectrics</span></strong>. All Rights Reserved
-        <div class="copyright">
-          <span><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terminos&Condiciones</a></span>
-        </div>
-      </div>
-    </div>
-  </footer><!-- End  Footer -->
-
-  <!-- Modal -->
-  <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Términos y Condiciones</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Bienvenido al [Tecnelectrics], proporcionado por [Nombre de la Empresa]. Al utilizar nuestro servicio, usted acepta los siguientes términos y condiciones:
-
-          <br><br><strong>Registro y Cuentas de Usuario:</strong> Para utilizar nuestro CRM, puede ser necesario registrarse y crear una cuenta de usuario. Usted es responsable de mantener la confidencialidad de su cuenta y contraseña.
-
-          <br><br><strong>Propiedad Intelectual:</strong> Todos los derechos de propiedad intelectual sobre el CRM [Nombre del CRM] y cualquier contenido generado por los usuarios pertenecen a [Nombre de la Empresa].
-
-          <br><br><strong>Privacidad y Seguridad:</strong> Nos comprometemos a proteger la privacidad y seguridad de sus datos.
-
-          <br><br><strong>Uso Aceptable:</strong> Usted acepta utilizar nuestro CRM de manera ética y legal. Se prohíbe cualquier uso del servicio que sea ilegal o que viole los derechos de terceros.
-
-          <br><br><strong>Responsabilidad:</strong> No somos responsables de ningún daño directo, indirecto, incidental, especial o consecuente que surja del uso de nuestro CRM. Usted utiliza nuestro servicio bajo su propio riesgo.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
 
 </body>
 
