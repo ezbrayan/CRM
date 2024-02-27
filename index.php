@@ -78,6 +78,9 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
+
+
+      .
         &copy; Copyright <strong><span>TecniElectrics</span></strong>. All Rights Reserved
         <div class="copyright">
           <span><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terminos&Condiciones</a></span>

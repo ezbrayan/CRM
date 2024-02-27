@@ -20,202 +20,134 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
 
 // Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
 ?>
-
-<?php
-require_once("Config/conexion.php");
-
-// Crear una instancia de la clase Database para obtener la conexión PDO
-$database = new Database();
-$pdo = $database->conectar();
-
-// Inicializar mensaje de error
-$error = '';
-
-// Verificar si se ha enviado el formulario de registro
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $documento = $_POST["documento"];
-    $nombre = $_POST["nombre"];
-    $correo = $_POST["correo"];
-    $password = $_POST["password"];
-    $pin = $_POST["pin"];
-    $telefono = $_POST["telefono"];
-    $direccion = $_POST["direccion"];
-    $nitc = $_POST["nitc"];
-    $id_tip_usu = $_POST["id_tip_usu"];
-
-    // Validar campos obligatorios
-    if (empty($documento) || empty($nombre) || empty($correo) || empty($password) || empty($pin) || empty($telefono) || empty($direccion) || empty($nitc) || empty($id_tip_usu)) {
-        echo "<script>alert('Todos los campos son obligatorios.')</script>";
-    } else {
-        // Verificar si ya existe un usuario con el mismo correo, pin o documento
-        $query = "SELECT * FROM usuario WHERE correo = :correo OR pin = :pin OR documento = :documento";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute(array(':correo' => $correo, ':pin' => $pin, ':documento' => $documento));
-
-        // Si se encuentra algún registro, mostrar un mensaje de error
-        if ($stmt->rowCount() > 0) {
-            echo "<script>alert('Correo existente o pin')</script>";
-        } else {
-            // Si no hay registros duplicados, insertar el nuevo usuario
-            // Encriptar la contraseña antes de insertarla en la base de datos
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO usuario (documento, nombre, correo, password, pin, telefono, direccion, nitc, id_tip_usu) 
-                      VALUES (:documento, :nombre, :correo, :password, :pin, :telefono, :direccion, :nitc, :id_tip_usu)";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute(array(
-                ':documento' => $documento,
-                ':nombre' => $nombre,
-                ':correo' => $correo,
-                ':password' => $hashed_password, // Guardar la contraseña encriptada
-                ':pin' => $pin,
-                ':telefono' => $telefono,
-                ':direccion' => $direccion,
-                ':nitc' => $nitc,
-                ':id_tip_usu' => $id_tip_usu
-            ));
-            // Redirigir al usuario al index.php después del registro exitoso
-            header("Location: index.php");
-            exit(); // Detener la ejecución del script después de la redirección
-        }
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="Assets/css/formulario.css">
-    <title>FORMULARIO DE REGISTRO E INICIO SESIÓN</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="Admin/assets/img/favicon.png" rel="icon">
+    <link href="Admin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="Admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="Admin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="Admin/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
-    <div class="container-form register">
-        <div class="information">
-            <div class="info-childs">
-                <h2>Bienvenido</h2>
-                <p>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
-                <input type="button" value="Iniciar Sesión" id="sign-in">
-            </div>
-        </div>
-        <div class="form-information">
-            <div class="form-information-childs">
-                <h2>Crear una Cuenta</h2>
-                <p>o usa tu email para registrarte</p>
-                <form class="form" method="post">
-                    <label for="documento">
-                        <i class='bx bx-user'></i>
 
-                        <input type="text" id="documento" name="documento" placeholder="Documento:" required>
-                    </label>
-                    <label for="nombre">
-                        <i class='bx bx-envelope'></i>
+    <main>
+        <div class="container">
 
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre:" required>
-                    </label>
-                    <label for="correo">
-                        <i class="bx bxl-gmail"></i>
-                        <input type="email" id="correo" name="correo" placeholder="Correo:" required>
-                    </label>
-                    <label for="password">
-                        <i class='bx bx-lock-alt'></i>
+            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-                        <input type="password" id="password" name="password" placeholder="Contraseña:" required>
-                    </label>
-                    <label for="pin">
-                        <i class='bx bx-lock-alt'></i>
+                            <div class="d-flex justify-content-center py-4">
+                                <a href="index.php" class="logo d-flex align-items-center w-auto">
+                                    <img src="assets/img/logo.png" alt="">
+                                    <span class="d-none d-lg-block">CRM</span>
+                                </a>
+                            </div><!-- End Logo -->
 
-                        <input type="text" id="pin" name="pin" placeholder="PIN:" required>
-                    </label>
-                    <label for="telefono">
-                        <i class='bx bx-phone'></i>
+                            <div class="card mb-3">
 
-                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono:" required>
-                    </label>
-                    <label for="direccion">
-                        <i class='bx bx-home'></i>
+                                <div class="card-body">
 
-                        <input type="text" id="direccion" name="direccion" placeholder="Dirección:" required>
-                    </label>
-                    <label for="nitc">
-                        <select id="nitc" name="nitc" placeholder="Nitc:" required>
-                            <option value="">Seleccione su empresa</option>
-                            <?php
-                            // Conectar a la base de datos y obtener los roles
-                            require_once("Config/conexion.php");
-                            $database = new Database();
-                            $pdo = $database->conectar();
-                            $query = "SELECT * FROM empresa";
-                            $stmt = $pdo->query($query);
-                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<option value='" . $row['nitc'] . "'>" . $row['nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </label>
-                    <label for="id_tip_usu">
-                        <select id="id_tip_usu" name="id_tip_usu" placeholder="usuario:" required>
-                            <option value="">Seleccione un tipo de usuario</option>
-                            <?php
-                            // Conectar a la base de datos y obtener los roles
-                            require_once("Config/conexion.php");
-                            $database = new Database();
-                            $pdo = $database->conectar();
-                            $query = "SELECT * FROM roles WHERE id_tip_usu < 2 ";
-                            $stmt = $pdo->query($query);
-                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<option value='" . $row['id_tip_usu'] . "'>" . $row['tip_usu'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </label>
-                    <button type="submit">Registrarse</button>
-                </form>
-            </div>
-        </div>
-    </div>
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Inicia Session</h5>
+                                        <p class="text-center small">Ingrese los datos requeridos</p>
+                                    </div>
 
-    <div class="container-form login hide">
-        <div class="information">
-            <div class="info-childs">
-                <h2>¡¡Bienvenido nuevamente!!</h2>
-                <p>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
-                <input type="button" value="Registrarme" id="sign-up">
-            </div>
-        </div>
-        <div class="form-information">
-            <div class="form-information-childs">
-                <h2>Iniciar Sesión</h2>
-                <div class="icons">
-                    <i class='bx bxl-google'></i>
-                    <i class='bx bxl-github'></i>
-                    <i class='bx bxl-linkedin'></i>
+                                    <form class="row g-3 needs-validation" novalidate>
+
+                                        <div class="col-12">
+                                            <label for="yourUsername" class="form-label">Correo</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                                <div class="invalid-feedback">Por Favor, ingrese su Correo-electronico!</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                            <div class="invalid-feedback">Por Favor, ingrese su Contraseña!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Login</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php">registrate</a></p>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <div class="credits">
+                                Terminos Y Condiciones</a>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <p>o Iniciar Sesión con una cuenta</p>
-                <form  class="form" method="post">
-                    <label for="correo">
-                        <i class='bx bx-envelope'></i>
-                        
-                        <input type="email" id="correo" name="correo" placeholder="Correo:" required>
-                    </label>
-                    <label for="password">
-                        <i class='bx bx-lock-alt'></i>
-                        <input type="password" id="password" name="password" placeholder="Contraseña:" required>
-                    </label>
-                    <button type="submit">Iniciar Sesión</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <script src="Assets/js/script.js"></script>
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="Admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="Admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Admin/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="Admin/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="Admin/assets/vendor/quill/quill.min.js"></script>
+    <script src="Admin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="Admin/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="Admin/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="Admin/assets/js/main.js"></script>
+
 </body>
 
 </html>
