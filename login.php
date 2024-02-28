@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("Config/conexion.php");
 
 // Crear una instancia de la clase Database para obtener la conexión PDO
@@ -19,6 +20,48 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
 }
 
 // Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $correo = $_POST["correo"];
+    $password = $_POST["contraseña"];
+
+    if (empty($correo) || empty($password)) {
+        $_SESSION['error'] = 'Correo y contraseña son obligatorios.';
+        header("Location: login.php");
+        exit();
+    }
+
+    $query = "SELECT * FROM usuario WHERE correo = :correo";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(array(':correo' => $correo));
+
+    if ($stmt->rowCount() == 1) {
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['usuario'] = $user;
+
+            if ($user['id_tip_usu'] == 1) {
+                header("Location: Views/index.php");
+                exit();
+            } elseif ($user['id_tip_usu'] == 2) {
+                header("Location: Admin/index.php");
+                exit();
+            } else {
+                header("Location: index.php?accion=registro");
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = 'Contraseña incorrecta.';
+            echo "<script>alert('Contraseña incorrecta.'); window.location.href='login.php?accion=registro';</script>";
+            exit();
+        }
+    } else {
+        $_SESSION['error'] = 'Usuario no encontrado.';
+        echo "<script>alert('Usuario no encontrado.'); window.location.href='login.php?accion=registro';</script>";
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,20 +129,20 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
                                         <p class="text-center small">Ingrese los datos requeridos</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3 needs-validation" action="login.php" method="post" novalidate>
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Correo</label>
+                                            <label for="correo" class="form-label">Correo</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                                <input type="text" name="correo" class="form-control" id="correo" required>
                                                 <div class="invalid-feedback">Por Favor, ingrese su Correo-electronico!</div>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                            <label for="contraseña" class="form-label">Password</label>
+                                            <input type="password" name="contraseña" class="form-control" id="contraseña" required>
                                             <div class="invalid-feedback">Por Favor, ingrese su Contraseña!</div>
                                         </div>
 
@@ -113,7 +156,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php">registrate</a></p>
+                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a></p>
                                         </div>
                                     </form>
 

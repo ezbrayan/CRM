@@ -1,3 +1,23 @@
+<?php
+include('../../Config/conexion.php');
+
+$database = new Database();
+$pdo = $database->conectar();
+
+// Check if delete button is clicked
+if (isset($_GET['delete_nitc'])) {
+    $nitcToDelete = $_GET['delete_nitc'];
+
+    // Prepare and execute the delete query
+    $deleteQuery = $pdo->prepare("DELETE FROM empresa WHERE nitc = ?");
+    $deleteQuery->execute([$nitcToDelete]);
+}
+
+// Fetch and display data
+$selectQuery = $pdo->prepare("SELECT * FROM empresa");
+$selectQuery->execute();
+$empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +30,8 @@
     <meta content name="keywords">
 
     <!-- Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Favicons -->
     <link href="../assets/img/favicon.png" rel="icon">
@@ -18,7 +39,9 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,8 +56,8 @@
     <link href="../assets/css/style.css" rel="stylesheet">
 
     <!--data tables-->
-    <link rel="stylesheet" type="../text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -323,7 +346,7 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="../Eliminar/Empresa.php">
+                        <a href="../Visualizar/Empresa.php">
                             <i class="bi bi-circle"></i><span>Visualizar</span>
                         </a>
                     </li>
@@ -337,7 +360,8 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -443,22 +467,44 @@
             <div class="container my-5">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <table id="datatable_users" class="table">
+                        <table class="table" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nitc</th>
+                                    <th>NITC</th>
                                     <th>Nombre</th>
-                                    <th>Dirrecion</th>
+                                    <th>Direccion</th>
                                     <th>Telefono</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="tableBody_users"></tbody>
+                            <tbody>
+                                <?php foreach ($empresas as $empresa) { ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $empresa['nitc']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $empresa['nombre']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $empresa['direccion']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $empresa['telefono']; ?>
+                                        </td>
+                                        <td>
+                                            <a
+                                                href="../Actualizar/Empresa.php?nitc=<?php echo $empresa['nitc']; ?>">Actualizar</a>
+                                            <a href="?delete_nitc=<?php echo $empresa['nitc']; ?>"
+                                                onclick="return confirm('Estas Seguro de Eliminar esta Empresa?')">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </section>
 
 
@@ -478,7 +524,8 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -490,15 +537,19 @@
 <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="../assets/vendor/php-email-form/validate.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
-<!-- Tu script principal -->
-<script src="../assets/js/datatable.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    });
+</script>
 
 
 </body>

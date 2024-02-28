@@ -341,7 +341,7 @@
           <ul id="forms-nav" class="nav-content collapse "
               data-bs-parent="#sidebar-nav">
               <li>
-                  <a href="Eliminar/Empresa.php">
+                  <a href="Visualizar/Empresa.php">
                       <i class="bi bi-circle"></i><span>Visualizar</span>
                   </a>
               </li>

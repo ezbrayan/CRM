@@ -5,57 +5,76 @@ require_once("Config/conexion.php");
 $database = new Database();
 $pdo = $database->conectar();
 
+// Verificar si se ha hecho clic en el enlace de registro
+if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
+    // Consultar si hay una licencia activa
+    $query = "SELECT * FROM licencia WHERE estado = 1";
+    $resultado = $pdo->query($query);
+
+    // Si no hay una licencia activa, redirigir al usuario al index.php
+    if ($resultado->rowCount() != 1) {
+        header("Location: index.php");
+        exit(); // Detener la ejecución del script
+    }
+}
+
+// Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
+
 // Inicializar mensaje de error
 $error = '';
 
 // Verificar si se ha enviado el formulario de registro
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Obtener los datos del formulario
-  $documento = $_POST["documento"];
-  $nombre = $_POST["nombre"];
-  $correo = $_POST["correo"];
-  $password = $_POST["password"];
-  $pin = $_POST["pin"];
-  $telefono = $_POST["telefono"];
-  $direccion = $_POST["direccion"];
-  $nitc = $_POST["nitc"];
-  $id_tip_usu = $_POST["id_tip_usu"];
+    // Obtener los datos del formulario
+    $documento = $_POST["documento"];
+    $nombre = $_POST["nombre"];
+    $correo = $_POST["correo"];
+    $password = $_POST["password"];
+    $pin = $_POST["pin"];
+    $telefono = $_POST["telefono"];
+    $direccion = $_POST["direccion"];
+    $nitc = $_POST["nitc"];
 
-  // Validar campos obligatorios
-  if (empty($documento) || empty($nombre) || empty($correo) || empty($password) || empty($pin) || empty($telefono) || empty($direccion) || empty($nitc) || empty($id_tip_usu)) {
-    echo "<script>alert('Todos los campos son obligatorios.')</script>";
-  } else {
-    // Verificar si ya existe un usuario con el mismo correo, pin o documento
-    $query = "SELECT * FROM usuario WHERE correo = :correo OR pin = :pin OR documento = :documento";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute(array(':correo' => $correo, ':pin' => $pin, ':documento' => $documento));
-
-    // Si se encuentra algún registro, mostrar un mensaje de error
-    if ($stmt->rowCount() > 0) {
-      echo "<script>alert('Correo existente o pin')</script>";
+    // Validar campos obligatorios
+    if (empty($documento) || empty($nombre) || empty($correo) || empty($password) || empty($pin) || empty($telefono) || empty($direccion) || empty($nitc)) {
+        echo "<script>alert('Todos los campos son obligatorios.')</script>";
     } else {
-      // Si no hay registros duplicados, insertar el nuevo usuario
-      // Encriptar la contraseña antes de insertarla en la base de datos
-      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-      $query = "INSERT INTO usuario (documento, nombre, correo, password, pin, telefono, direccion, nitc, id_tip_usu) 
-                      VALUES (:documento, :nombre, :correo, :password, :pin, :telefono, :direccion, :nitc, :id_tip_usu)";
-      $stmt = $pdo->prepare($query);
-      $stmt->execute(array(
-        ':documento' => $documento,
-        ':nombre' => $nombre,
-        ':correo' => $correo,
-        ':password' => $hashed_password, // Guardar la contraseña encriptada
-        ':pin' => $pin,
-        ':telefono' => $telefono,
-        ':direccion' => $direccion,
-        ':nitc' => $nitc,
-        ':id_tip_usu' => $id_tip_usu
-      ));
-      // Mostrar alerta de registro exitoso
-      echo "<script>alert('Se ha registrado correctamente'); window.location='Views/index.php';</script>";
-      exit(); // Detener la ejecución del script después de la redirección
+        // Verificar si ya existe un usuario con el mismo correo, pin o documento
+        $query = "SELECT * FROM usuario WHERE correo = :correo OR pin = :pin OR documento = :documento";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(array(':correo' => $correo, ':pin' => $pin, ':documento' => $documento));
+
+        // Si se encuentra algún registro, mostrar un mensaje de error
+        if ($stmt->rowCount() > 0) {
+            echo "<script>alert('Correo existente o pin')</script>";
+        } else {
+            // Si no hay registros duplicados, insertar el nuevo usuario
+            // Encriptar la contraseña antes de insertarla en la base de datos
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            // Asignar el valor predeterminado de id_tip_usu a 1
+            $tipo_usuario = 1;
+
+            $query_insert_user = "INSERT INTO usuario (documento, nombre, correo, password, pin, telefono, direccion, nitc, id_tip_usu) 
+                                  VALUES (:documento, :nombre, :correo, :password, :pin, :telefono, :direccion, :nitc, :id_tip_usu)";
+            $stmt_insert_user = $pdo->prepare($query_insert_user);
+            $stmt_insert_user->execute(array(
+                ':documento' => $documento,
+                ':nombre' => $nombre,
+                ':correo' => $correo,
+                ':password' => $hashed_password,
+                ':pin' => $pin,
+                ':telefono' => $telefono,
+                ':direccion' => $direccion,
+                ':nitc' => $nitc,
+                ':id_tip_usu' => $tipo_usuario 
+            ));
+
+            // Mostrar alerta de registro exitoso
+            echo "<script>alert('Se ha registrado correctamente'); window.location='Views/index.php';</script>";
+            exit(); 
+        }
     }
-  }
 }
 ?>
 
@@ -177,24 +196,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                       </select>
                     </label>
-                    <label for="id_tip_usu">
-                      <select id="id_tip_usu" name="id_tip_usu" placeholder="usuario:" required>
-                        <?php
-                        // Conectar a la base de datos y obtener los roles
-                        require_once("Config/conexion.php");
-                        $database = new Database();
-                        $pdo = $database->conectar();
-                        $query = "SELECT * FROM roles WHERE id_tip_usu < 2 ";
-                        $stmt = $pdo->query($query);
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                          echo "<option value='" . $row['id_tip_usu'] . "'>" . $row['tip_usu'] . "</option>";
-                        }
-                        ?>
-                      </select>
-                    </label>
                     <button class="btn btn-primary w-100" type="submit">Registrarse</button>
                     <div class="col-12">
-                      <p class="small mb-0">Ya tienes una Cuenta? <a href="login.php">Inicia Session</a></p>
+                      <p class="small mb-0">Ya tienes una Cuenta? <a href="login.php?accion=registro">Inicia Session</a></p>
                     </div>
                   </form>
 
