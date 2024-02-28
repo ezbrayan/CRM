@@ -30,8 +30,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
     <meta content name="keywords">
 
     <!-- Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Favicons -->
     <link href="../assets/img/favicon.png" rel="icon">
@@ -39,9 +38,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -360,8 +357,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -467,7 +463,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
             <div class="container my-5">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <table class="table" id="dataTable">
+                        <table class="table booptrat" id="dataTable"> <!-- Agregar la clase "booptrat" -->
                             <thead>
                                 <tr>
                                     <th>NITC</th>
@@ -493,10 +489,8 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
                                             <?php echo $empresa['telefono']; ?>
                                         </td>
                                         <td>
-                                            <a
-                                                href="../Actualizar/Empresa.php?nitc=<?php echo $empresa['nitc']; ?>">Actualizar</a>
-                                            <a href="?delete_nitc=<?php echo $empresa['nitc']; ?>"
-                                                onclick="return confirm('Estas Seguro de Eliminar esta Empresa?')">Eliminar</a>
+                                            <a href="../Actualizar/Empresa.php?nitc=<?php echo $empresa['nitc']; ?>" class="btn btn-primary">Actualizar</a> <!-- Agregar clase "btn-booptrad" -->
+                                            <a href="?delete_nitc=<?php echo $empresa['nitc']; ?>" onclick="return confirm('Estas Seguro de Eliminar esta Empresa?')" class="btn btn-danger">Eliminar</a> <!-- Agregar clase "btn-booptrad" -->
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -506,6 +500,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
         </section>
+
 
 
 </body>
@@ -524,8 +519,7 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -539,14 +533,12 @@ $empresas = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#dataTable').DataTable();
     });
 </script>
