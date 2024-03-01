@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 session_start();
+=======
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
 require_once("Config/conexion.php");
 
 // Crear una instancia de la clase Database para obtener la conexión PDO
@@ -8,6 +11,7 @@ $pdo = $database->conectar();
 
 // Verificar si se ha hecho clic en el enlace de registro
 if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
+<<<<<<< HEAD
     // Consultar cuántas licencias activas hay
     $query = "SELECT COUNT(*) as total FROM licencia WHERE estado = 1";
     $resultado = $pdo->query($query);
@@ -22,6 +26,14 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
         // exit();
     } else {
         // Si no hay una licencia activa, redirigir al usuario al index.php
+=======
+    // Consultar si hay una licencia activa
+    $query = "SELECT * FROM licencia WHERE estado = 1";
+    $resultado = $pdo->query($query);
+
+    // Si no hay una licencia activa, redirigir al usuario al index.php
+    if ($resultado->rowCount() != 1) {
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
         header("Location: index.php");
         exit(); // Detener la ejecución del script
     }
@@ -80,7 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ));
 
             // Mostrar alerta de registro exitoso
+<<<<<<< HEAD
             echo "<script>alert('Se ha registrado correctamente'); window.location='../crm/Views/index.php';</script>";
+=======
+            echo "<script>alert('Se ha registrado correctamente'); window.location='Views/index.php';</script>";
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
             exit(); 
         }
     }

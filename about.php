@@ -10,6 +10,10 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+<<<<<<< HEAD
+=======
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -41,6 +45,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
       <h1 class="logo me-auto me-lg-0"><a href="index.php">CRM</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -50,11 +55,26 @@
           <li><a href="about.php">Acerca de Nosotros</a></li>
           <li><a href="servicio.php">Servicios</a></li>
           <li><a href="contacto.php">Contacto</a></li>
+=======
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Tecni-Electric</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="index.php">Inicio</a></li>
+          <li><a href="about.php">Acerca de Nosotros</a></li>
+          <li><a href="servicio.php">Servicios</a></li>
+          <li><a href="contacto.php">Contactos</a></li>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <div class="header-social-links">
+<<<<<<< HEAD
         <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+=======
+      <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
         <a href="https://web.facebook.com/?locale=es_LA&_rdc=1&_rdr" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="https://www.instagram.com/" class="instagram"><i class="bi bi-instagram"></i></a>
       </div>
@@ -62,6 +82,7 @@
   </header><!-- End Header -->
 
   <main id="main">
+<<<<<<< HEAD
    <!-- ======= About Section ======= -->
    <section id="about" class="about">
       <div class="container" data-aos="fade-up">
@@ -190,6 +211,67 @@
     </section><!-- End About Boxes Section -->
   </main><!-- End #main -->
 
+=======
+    <section class="parallax">
+      <i class="fa-solid fa-lightbulb"id="titulo" ></i>
+      <img src="assets/img/mountain-blue.png" id="mountain-blue">
+      <img src="assets/img/trees-left.png" id="trees-left">
+      <img src="assets/img/mountain-red.png" id="mountain-red">
+      <img src="assets/img/trees-bottom.png" id="trees-bottom">
+      <img src="assets/img/man.png" id="man">
+      <img src="assets/img/plants.png" id="plants">
+  </section>
+  <section class="informacion">
+    <section class="two-col-sec section pt-0"> 
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2">
+                    <div class="sec-text">
+                        <h2 class="xxl-title">MISIÓN</h2>
+                        <p class="p">Proporcionaremos soluciones integrales y eficientes para resolver 
+                          los problemas informáticos de nuestros clientes, ya sea relacionados con software o hardware. 
+                          Nos comprometemos a ofrecer un servicio de atención al cliente excepcional, basado en la empatía, 
+                          la experiencia técnica y la innovación constante. Buscamos simplificar la experiencia tecnológica 
+                          de nuestros usuarios, brindando soluciones personalizadas que garanticen su satisfacción y les permitan 
+                          aprovechar al máximo su equipo informático.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1">
+                    <div class="sec-img">
+                        <img src="Assets/img/objetivo.png " alt="" class="img1" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="two-col-sec section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="sec-img mt-5">
+                        <img src="Assets/img/vision2.png " alt="" class="img2" >
+                    </div>
+                </div>
+                <div class="col-lg-7"> <!-- ya -->
+                    <div class="sec-text">
+                        <h2 class="xxl-title">VISIÓN</h2>
+                        <p class="p">Nos visualizamos como líderes en el campo de la asistencia tecnológica, 
+                          siendo reconocidos por nuestra excelencia en la resolución de problemas informáticos.
+                           Buscamos ser un referente en la industria, siendo innovadores en la implementación de tecnologías 
+                           emergentes y enfoques creativos para abordar las necesidades cambiantes de nuestros clientes. 
+                           Nos esforzamos por construir relaciones sólidas y a largo plazo con nuestros clientes, siendo 
+                           su primer recurso cuando enfrentan desafíos tecnológicos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+  </main><!-- End #main -->
+
+
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
  <!-- ======= Footer ======= -->
  <footer id="footer">
     <div class="container">
@@ -246,3 +328,7 @@
 
 </body>
 
+<<<<<<< HEAD
+=======
+</html>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
