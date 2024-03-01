@@ -8,16 +8,22 @@ $pdo = $database->conectar();
 
 // Verificar si se ha hecho clic en el enlace de registro
 if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
-    // Consultar si hay una licencia activa
-    $query = "SELECT * FROM licencia WHERE estado = 1";
+    // Consultar cuántas licencias activas hay
+    $query = "SELECT COUNT(*) as total FROM licencia WHERE estado = 1";
     $resultado = $pdo->query($query);
+    $row = $resultado->fetch(PDO::FETCH_ASSOC);
+    $total_licencias_activas = $row['total'];
 
-    // Si no hay una licencia activa, redirigir al usuario al index.php
-    if ($resultado->rowCount() != 1) {
+    // Si hay una o más licencias activas, realizar la acción de registro
+    if ($total_licencias_activas >= 1) {
+        
+    } else {
+        // Si no hay una licencia activa, redirigir al usuario al index.php
         header("Location: index.php");
         exit(); // Detener la ejecución del script
     }
 }
+
 
 // Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
 
@@ -135,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <label for="correo" class="form-label">Correo</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="correo" class="form-control" id="correo" required>
+                                                <input type="email" name="correo" class="form-control" id="correo" required>
                                                 <div class="invalid-feedback">Por Favor, ingrese su Correo-electronico!</div>
                                             </div>
                                         </div>
@@ -156,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a></p>
+                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a> O <a href="Email/recuperar.php?accion=registro">forget contraseña</a></p>
                                         </div>
                                     </form>
 

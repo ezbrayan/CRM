@@ -10,7 +10,6 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -42,20 +41,20 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-      <h1 class="logo me-auto me-lg-0"><a href="index.html">Tecni-Electric</a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="index.php">CRM</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a href="index.php">Inicio</a></li>
+      <ul>
+          <li><a href="index.php">Home</a></li>
           <li><a href="about.php">Acerca de Nosotros</a></li>
           <li><a href="servicio.php">Servicios</a></li>
-          <li><a href="contacto.php">Contactos</a></li>
+          <li><a href="contacto.php">Contacto</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <div class="header-social-links">
-      <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
         <a href="https://web.facebook.com/?locale=es_LA&_rdc=1&_rdr" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="https://www.instagram.com/" class="instagram"><i class="bi bi-instagram"></i></a>
       </div>
@@ -63,64 +62,133 @@
   </header><!-- End Header -->
 
   <main id="main">
-    <section class="parallax">
-      <i class="fa-solid fa-lightbulb"id="titulo" ></i>
-      <img src="assets/img/mountain-blue.png" id="mountain-blue">
-      <img src="assets/img/trees-left.png" id="trees-left">
-      <img src="assets/img/mountain-red.png" id="mountain-red">
-      <img src="assets/img/trees-bottom.png" id="trees-bottom">
-      <img src="assets/img/man.png" id="man">
-      <img src="assets/img/plants.png" id="plants">
-  </section>
-  <section class="informacion">
-    <section class="two-col-sec section pt-0"> 
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 order-lg-1 order-2">
-                    <div class="sec-text">
-                        <h2 class="xxl-title">MISIÓN</h2>
-                        <p class="p">Proporcionaremos soluciones integrales y eficientes para resolver 
-                          los problemas informáticos de nuestros clientes, ya sea relacionados con software o hardware. 
-                          Nos comprometemos a ofrecer un servicio de atención al cliente excepcional, basado en la empatía, 
-                          la experiencia técnica y la innovación constante. Buscamos simplificar la experiencia tecnológica 
-                          de nuestros usuarios, brindando soluciones personalizadas que garanticen su satisfacción y les permitan 
-                          aprovechar al máximo su equipo informático.</p>
-                    </div>
+   <!-- ======= About Section ======= -->
+   <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row justify-content-end">
+          <div class="col-lg-11">
+            <div class="row justify-content-end">
+
+              <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <i class="bi bi-emoji-smile"></i>
+                  <span data-purecounter-start="0" data-purecounter-end="+150" data-purecounter-duration="1" class="purecounter"></span>
+                  <p>Clientes Felices</p>
                 </div>
-                <div class="col-lg-6 order-lg-2 order-1">
-                    <div class="sec-img">
-                        <img src="Assets/img/objetivo.png " alt="" class="img1" >
-                    </div>
+              </div>
+
+              <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <i class="bi bi-journal-richtext"></i>
+                  <span data-purecounter-start="0" data-purecounter-end="+80" data-purecounter-duration="1" class="purecounter"></span>
+                  <p>Proyectos</p>
                 </div>
+              </div>
+
+              <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <i class="bi bi-clock"></i>
+                  <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter"></span>
+                  <p>Años de Experiencia</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+                <div class="count-box">
+                  <i class="bi bi-award"></i>
+                  <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+                  <p>Certificados</p>
+                </div>
+              </div>
+
             </div>
+          </div>
         </div>
-    </section>
- 
-    <section class="two-col-sec section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <div class="sec-img mt-5">
-                        <img src="Assets/img/vision2.png " alt="" class="img2" >
-                    </div>
-                </div>
-                <div class="col-lg-7"> <!-- ya -->
-                    <div class="sec-text">
-                        <h2 class="xxl-title">VISIÓN</h2>
-                        <p class="p">Nos visualizamos como líderes en el campo de la asistencia tecnológica, 
+
+        <div class="row">
+
+          <div class="col-lg-6 video-box align-self-baseline" data-aos="zoom-in" data-aos-delay="100">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="" >
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
+          </div>
+
+          <div class="col-lg-6 pt-3 pt-lg-0 content">
+            <h3>Nuestra Identidad</h3>
+            <h3>Compromiso y Excelencia en el Servicio</h3>
+            <p>
+            Somos un equipo dedicado de profesionales apasionados por la tecnología y comprometidos con ofrecer soluciones integrales 
+            a nuestros clientes. Nos distingue nuestra capacidad para comprender las complejidades del software y hardware, transformando cualquier tipo de
+            desafíos en oportunidades de crecimiento y mejora. 
+            </p>
+            <ul>
+              <li><i class="bx bx-check-double"></i>Nos encanta lo que hacemos y estamos aquí para resolver tus problemas tecnológicos.</li>
+              <li><i class="bx bx-check-double"></i>Estamos aquí para apoyarte en cada paso del camino, porque tu éxito es nuestro éxito.</li>
+              <li><i class="bx bx-check-double"></i>Nos gusta enfrentar retos y convertirlos en oportunidades para crecer y mejorar juntos.</li>
+              <li><i class="bx bx-check-double"></i>Entendemos que tus necesidades son únicas y que no siempre puedes resolverlas, por eso buscamos ofrecer soluciones personalizadas que se adaptan a ti.
+
+</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= About Boxes Section ======= -->
+    <section id="about-boxes" class="about-boxes">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="card">
+              <img src="assets/img/about-boxes-1.jpg" class="card-img-top" alt="...">
+              <div class="card-icon">
+                <i class="ri-brush-4-line"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">Misión</a></h5>
+                <p class="card-text">Proporcionar soluciones integrales y eficientes para resolver 
+                          los problemas informáticos de nuestros clientes, ya sea relacionados con software o hardware. 
+                          Ofreciendo un servicio de atención al cliente excepcional, basado en la empatía, 
+                          la experiencia técnica y la innovación constante.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="card">
+              <img src="assets/img/about-boxes-2.jpg" class="card-img-top" alt="...">
+              <div class="card-icon">
+                <i class="fa-light fa-hand-holding-heart"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">Valores</a></h5>
+                <p class="card-text">La integridad, responsabilidad, amabilidad y paciencia son los pilares sobre los cuales construimos todas nuestras relaciones,
+                tanto internas como externas. Valorando la transparencia y la honestidad en cada interacción, comprometiendonos a buscar constantemente soluciones. </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="card">
+              <img src="assets/img/about-boxes-3.jpg" class="card-img-top" alt="...">
+              <div class="card-icon">
+                <i class="ri-movie-2-line"></i>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">Visión</a></h5>
+                <p class="card-text">Nos visualizamos como líderes en el campo de la asistencia tecnológica, 
                           siendo reconocidos por nuestra excelencia en la resolución de problemas informáticos.
                            Buscamos ser un referente en la industria, siendo innovadores en la implementación de tecnologías 
-                           emergentes y enfoques creativos para abordar las necesidades cambiantes de nuestros clientes. 
-                           Nos esforzamos por construir relaciones sólidas y a largo plazo con nuestros clientes, siendo 
-                           su primer recurso cuando enfrentan desafíos tecnológicos.</p>
-                    </div>
-                </div>
+                           emergentes y enfoques creativos. </p>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-</section>
-  </main><!-- End #main -->
 
+      </div>
+    </section><!-- End About Boxes Section -->
+  </main><!-- End #main -->
 
  <!-- ======= Footer ======= -->
  <footer id="footer">
@@ -178,4 +246,3 @@
 
 </body>
 
-</html>
