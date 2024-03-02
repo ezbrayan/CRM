@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 <?php
 session_start();
 ?>
+=======
+>>>>>>> origin/master
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +16,16 @@ session_start();
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+<<<<<<< HEAD
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+=======
+<<<<<<< HEAD
+=======
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -47,7 +57,11 @@ session_start();
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
       <h1 class="logo me-auto me-lg-0"><a href="index.php">CRM</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -57,11 +71,33 @@ session_start();
           <li><a href="about.php">Acerca de Nosotros</a></li>
           <li><a href="servicio.php">Servicios</a></li>
           <li><a href="contacto.php">Contacto</a></li>
+<<<<<<< HEAD
+=======
+=======
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Tecni-Electric</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="index.php">Inicio</a></li>
+          <li><a href="about.php">Acerca de Nosotros</a></li>
+          <li><a href="servicio.php">Servicios</a></li>
+          <li><a href="contacto.php">Contactos</a></li>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <div class="header-social-links">
+<<<<<<< HEAD
         <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+=======
+<<<<<<< HEAD
+        <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+=======
+      <a href="https://web.whatsapp.com/" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
         <a href="https://web.facebook.com/?locale=es_LA&_rdc=1&_rdr" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="https://www.instagram.com/" class="instagram"><i class="bi bi-instagram"></i></a>
       </div>
@@ -69,8 +105,14 @@ session_start();
   </header><!-- End Header -->
 
   <main id="main">
+<<<<<<< HEAD
 
 <section id="about" class="about">
+=======
+<<<<<<< HEAD
+   <!-- ======= About Section ======= -->
+   <section id="about" class="about">
+>>>>>>> origin/master
       <div class="container" data-aos="fade-up">
 
         <div class="row justify-content-end">
@@ -186,8 +228,13 @@ session_start();
                 <h5 class="card-title"><a href="">Visión</a></h5>
                 <p class="card-text">Nos visualizamos como líderes en el campo de la asistencia tecnológica, 
                           siendo reconocidos por nuestra excelencia en la resolución de problemas informáticos.
+<<<<<<< HEAD
                           Buscamos ser un referente en la industria, siendo innovadores en la implementación de tecnologías 
                           emergentes y enfoques creativos. </p>
+=======
+                           Buscamos ser un referente en la industria, siendo innovadores en la implementación de tecnologías 
+                           emergentes y enfoques creativos. </p>
+>>>>>>> origin/master
               </div>
             </div>
           </div>
@@ -197,7 +244,11 @@ session_start();
     </section><!-- End About Boxes Section -->
   </main><!-- End #main -->
 
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> origin/master
     <section class="parallax">
       <i class="fa-solid fa-lightbulb"id="titulo" ></i>
       <img src="assets/img/mountain-blue.png" id="mountain-blue">
@@ -314,5 +365,12 @@ session_start();
 
 </body>
 
+<<<<<<< HEAD
 </html>
 
+=======
+<<<<<<< HEAD
+=======
+</html>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master

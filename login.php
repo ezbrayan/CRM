@@ -8,6 +8,10 @@ $pdo = $database->conectar();
 
 // Verificar si se ha hecho clic en el enlace de registro
 if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
     // Consultar cuántas licencias activas hay
     $query = "SELECT COUNT(*) as total FROM licencia WHERE estado = 1";
     $resultado = $pdo->query($query);
@@ -15,22 +19,52 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
     $total_licencias_activas = $row['total'];
 
     // Si hay una o más licencias activas, realizar la acción de registro
+<<<<<<< HEAD
     if ($total_licencias_activas < 1) {
         // Si no hay una licencia activa, redirigir al usuario al index.php
+=======
+    if ($total_licencias_activas >= 1) {
+        
+    } else {
+        // Si no hay una licencia activa, redirigir al usuario al index.php
+=======
+    // Consultar si hay una licencia activa
+    $query = "SELECT * FROM licencia WHERE estado = 1";
+    $resultado = $pdo->query($query);
+
+    // Si no hay una licencia activa, redirigir al usuario al index.php
+    if ($resultado->rowCount() != 1) {
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
         header("Location: index.php");
         exit(); // Detener la ejecución del script
     }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
 // Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
+<<<<<<< HEAD
     $contraseña = $_POST["contraseña"];
 
     if (empty($correo) || empty($contraseña)) {
         $_SESSION['error'] = 'Correo y contraseña son obligatorios.';
         echo "<script>alert('Correo y contraseña son obligatorios.'); window.location.href='login.php';</script>";
+=======
+    $password = $_POST["contraseña"];
+
+    if (empty($correo) || empty($password)) {
+        $_SESSION['error'] = 'Correo y contraseña son obligatorios.';
+        header("Location: login.php");
+>>>>>>> origin/master
         exit();
     }
 
@@ -41,7 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->rowCount() == 1) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+<<<<<<< HEAD
         if (password_verify($contraseña, $user['password'])) {
+=======
+        if (password_verify($password, $user['password'])) {
+>>>>>>> origin/master
             $_SESSION['usuario'] = $user;
 
             if ($user['id_tip_usu'] == 1) {
@@ -96,6 +134,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- Template Main CSS File -->
     <link href="Admin/assets/css/style.css" rel="stylesheet">
+<<<<<<< HEAD
+=======
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+>>>>>>> origin/master
 </head>
 
 <body>
@@ -130,10 +179,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <label for="correo" class="form-label">Correo</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
+<<<<<<< HEAD
 
                                                 <input type="email" name="correo" class="form-control" id="correo" required>
 
 
+=======
+<<<<<<< HEAD
+                                                <input type="email" name="correo" class="form-control" id="correo" required>
+=======
+                                                <input type="text" name="correo" class="form-control" id="correo" required>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
                                                 <div class="invalid-feedback">Por Favor, ingrese su Correo-electronico!</div>
                                             </div>
                                         </div>
@@ -154,10 +211,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                         <div class="col-12">
+<<<<<<< HEAD
 
                                             <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a> O <a href="Email/recuperar.php?accion=registro">forget contraseña</a></p>
 
 
+=======
+<<<<<<< HEAD
+                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a> O <a href="Email/recuperar.php?accion=registro">forget contraseña</a></p>
+=======
+                                            <p class="small mb-0">No Tienes Una Cuenta? <a href="registro.php?accion=registro">registrate</a></p>
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
                                         </div>
                                     </form>
 

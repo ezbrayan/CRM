@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 
 <?php
 session_start();
 ?>
 
+=======
+<<<<<<< HEAD
+<?php
+session_start();
+?>
+=======
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
 <!DOCTYPE html>
 <html lang="en">
 

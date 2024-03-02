@@ -1,5 +1,12 @@
 <?php
+<<<<<<< HEAD
 session_start();
+=======
+<<<<<<< HEAD
+session_start();
+=======
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
 require_once("Config/conexion.php");
 
 // Crear una instancia de la clase Database para obtener la conexión PDO
@@ -8,6 +15,10 @@ $pdo = $database->conectar();
 
 // Verificar si se ha hecho clic en el enlace de registro
 if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
     // Consultar cuántas licencias activas hay
     $query = "SELECT COUNT(*) as total FROM licencia WHERE estado = 1";
     $resultado = $pdo->query($query);
@@ -15,12 +26,34 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'registro') {
     $total_licencias_activas = $row['total'];
 
     // Si hay una o más licencias activas, realizar la acción de registro
+<<<<<<< HEAD
     if ($total_licencias_activas < 1) {
         // Si no hay una licencia activa, redirigir al usuario al index.php
         header("Location: index.php");
         exit(); // Detener la ejecución del script
     }
   }
+=======
+    if ($total_licencias_activas >= 1) {
+        // Realizar la acción de registro aquí
+        // Por ejemplo:
+        // header("Location: registro.php");
+        // exit();
+    } else {
+        // Si no hay una licencia activa, redirigir al usuario al index.php
+=======
+    // Consultar si hay una licencia activa
+    $query = "SELECT * FROM licencia WHERE estado = 1";
+    $resultado = $pdo->query($query);
+
+    // Si no hay una licencia activa, redirigir al usuario al index.php
+    if ($resultado->rowCount() != 1) {
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+        header("Location: index.php");
+        exit(); // Detener la ejecución del script
+    }
+}
+>>>>>>> origin/master
 
 // Si llegamos aquí, significa que hay una licencia activa o no se ha intentado registrarse
 
@@ -73,8 +106,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':nitc' => $nitc,
                 ':id_tip_usu' => $tipo_usuario 
             ));
+<<<<<<< HEAD
             // Mostrar alerta de registro exitoso
             echo "<script>alert('Se ha registrado correctamente'); window.location='../crm/Views/index.php';</script>";
+=======
+
+            // Mostrar alerta de registro exitoso
+<<<<<<< HEAD
+            echo "<script>alert('Se ha registrado correctamente'); window.location='../crm/Views/index.php';</script>";
+=======
+            echo "<script>alert('Se ha registrado correctamente'); window.location='Views/index.php';</script>";
+>>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+>>>>>>> origin/master
             exit(); 
         }
     }
