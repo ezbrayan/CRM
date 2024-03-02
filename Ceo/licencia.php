@@ -160,11 +160,10 @@ $licencias = $statement_licencias->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
+
         
     <a href="index.php" class="btn btn-success  float-right mt-3">Volver</a>
-=======
->>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
+
     </div>
 
     <!-- Bootstrap JS y dependencias Popper.js y jQuery -->
