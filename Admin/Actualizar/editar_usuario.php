@@ -116,11 +116,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $query_empresas = "SELECT * FROM empresa";
                         $stmt_empresas = $con->query($query_empresas);
                         while ($row_empresas = $stmt_empresas->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<option value='" . $row_empresas['nitc'] . "'>" . $row_empresas['nombre'] . "</option>";
+                            $selected_empresa = ($row_empresas['nitc'] == $usuario['nitc']) ? 'selected' : '';
+                            echo "<option value='" . $row_empresas['nitc'] . "' $selected_empresa>" . $row_empresas['nombre'] . "</option>";
                         }
                         ?>
                     </select>
                 </label>
+            </div>
                 <div class="col-12">
                     <label for="id_rol" class="form-label">Tipo de Usuario:</label>
                     <select class="form-control" id="id_rol" name="id_rol" required>
