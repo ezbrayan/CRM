@@ -197,67 +197,6 @@ session_start();
     </section><!-- End About Boxes Section -->
   </main><!-- End #main -->
 
-
-    <section class="parallax">
-      <i class="fa-solid fa-lightbulb"id="titulo" ></i>
-      <img src="assets/img/mountain-blue.png" id="mountain-blue">
-      <img src="assets/img/trees-left.png" id="trees-left">
-      <img src="assets/img/mountain-red.png" id="mountain-red">
-      <img src="assets/img/trees-bottom.png" id="trees-bottom">
-      <img src="assets/img/man.png" id="man">
-      <img src="assets/img/plants.png" id="plants">
-  </section>
-  <section class="informacion">
-    <section class="two-col-sec section pt-0"> 
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 order-lg-1 order-2">
-                    <div class="sec-text">
-                        <h2 class="xxl-title">MISIÓN</h2>
-                        <p class="p">Proporcionaremos soluciones integrales y eficientes para resolver 
-                          los problemas informáticos de nuestros clientes, ya sea relacionados con software o hardware. 
-                          Nos comprometemos a ofrecer un servicio de atención al cliente excepcional, basado en la empatía, 
-                          la experiencia técnica y la innovación constante. Buscamos simplificar la experiencia tecnológica 
-                          de nuestros usuarios, brindando soluciones personalizadas que garanticen su satisfacción y les permitan 
-                          aprovechar al máximo su equipo informático.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 order-lg-2 order-1">
-                    <div class="sec-img">
-                        <img src="Assets/img/objetivo.png " alt="" class="img1" >
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
- 
-    <section class="two-col-sec section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <div class="sec-img mt-5">
-                        <img src="Assets/img/vision2.png " alt="" class="img2" >
-                    </div>
-                </div>
-                <div class="col-lg-7"> <!-- ya -->
-                    <div class="sec-text">
-                        <h2 class="xxl-title">VISIÓN</h2>
-                        <p class="p">Nos visualizamos como líderes en el campo de la asistencia tecnológica, 
-                          siendo reconocidos por nuestra excelencia en la resolución de problemas informáticos.
-                           Buscamos ser un referente en la industria, siendo innovadores en la implementación de tecnologías 
-                           emergentes y enfoques creativos para abordar las necesidades cambiantes de nuestros clientes. 
-                           Nos esforzamos por construir relaciones sólidas y a largo plazo con nuestros clientes, siendo 
-                           su primer recurso cuando enfrentan desafíos tecnológicos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</section>
-  </main><!-- End #main -->
-
-
->>>>>>> 9c132d36d2a0a98b004098edb15558ab9c4f8b7d
  <!-- ======= Footer ======= -->
  <footer id="footer">
     <div class="container">
